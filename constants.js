@@ -9,7 +9,7 @@ const DEBOUNCE_DURATION = 8000;
 
 const OUTPUT_FILE = path.resolve(__dirname, "output.csv");
 
-const NO_RESULTS_FILE = path.relative(__dirname, "no_results.csv");
+const NO_RESULTS_FILE = path.resolve(__dirname, "no_results.csv");
 
 const FORMATS = {
   UTF8: "utf8"
