@@ -30,12 +30,12 @@ class WordReferenceUtils {
       .map(t => t.to.trim())
       .join(", ");
   }
-  static async fetchData(line) {
+  static async fetchData({ line, sourceLanguage = LANGUAGE_FROM, targetLanguage = LANGUAGE_TO }) {
     const hint = `(${line[0]})`;
     const response = await wordReferenceApi(
       encodeURI(line.normalize("NFD").replace(/[\u0300-\u036f]/g, "")),
-      LANGUAGE_FROM,
-      LANGUAGE_TO
+      sourceLanguage,
+      targetLanguage
     ).then(result => {
       const { translations } = result;
 
