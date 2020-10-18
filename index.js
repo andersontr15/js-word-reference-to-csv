@@ -56,8 +56,6 @@ const wordReferenceToCsv = () => {
   });
 };
 
-wordReferenceToCsv();
-
 module.exports = {
   wordReferenceToCsv
 };

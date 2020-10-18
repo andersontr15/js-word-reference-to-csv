@@ -945,7 +945,7 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-wordreference-api@^1.1.0:
+wordreference-api@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/wordreference-api/-/wordreference-api-1.1.0.tgz#f4ce0c15ebdea2e9a6496f40683870bbe0933918"
   integrity sha1-9M4MFeveoummSW9AaDhwu+CTORg=
