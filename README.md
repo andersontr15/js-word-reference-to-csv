@@ -13,21 +13,12 @@ Simple package that allows a user to take a csv file or string of semi-colon sep
 
 ## Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+To work with this package, you'll need at the bare minimum to create a no_results.csv file and an output.csv file. You will then either need an input.csv file or to pass an option of inputFormat as a string with inputData formatted as seen below. The default option is file.
 
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
+- npm install word_reference_to_csv
 
 ```
 Give the example
