@@ -45,7 +45,7 @@ class WordReferenceUtils {
 
       if (translations.length === 0) {
         console.error(`No translations found for word: ${line}`);
-        fs.appendFile(NO_RESULTS_FILE, `; ${line} \n`, () => {});
+        fs.appendFile(noResultsFile, `; ${line} \n`, () => {});
         return;
       }
 
@@ -57,7 +57,7 @@ class WordReferenceUtils {
         new Set(firstTwoResults.split(", "))
       ).join("/")}${hint}; ${line}  \n`;
 
-      fs.appendFile(OUTPUT_FILE, dataToAppend, () => {});
+      fs.appendFile(outputFile, dataToAppend, () => {});
     });
     return response;
   }

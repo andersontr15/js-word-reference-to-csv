@@ -19,13 +19,15 @@ const wordReferenceToCsv = async ({
   inputFormat = 'file',
   inputData = ''
 }) => {
-  if(!fs.existsSync(inputFile)) {
-    console.error('Input file path doesn\'t exist.');
-    return;
+  if(inputFormat === 'file') {
+    if(!fs.existsSync(inputFile)) {
+      console.error('Input file path doesn\'t exist.');
+      return;
+    }
   }
 
   if(!fs.existsSync(outputFile)) {
-    console.error('Input file path doesn\'t exist.');
+    console.error('Output file path doesn\'t exist.');
     return;
   }
 
@@ -50,7 +52,7 @@ const wordReferenceToCsv = async ({
       const lines = WordReferenceUtils.formatLines(inputData);
       const batches = WordReferenceUtils.createBatches(lines);
       let currentBatch = 0;
-      batches[0].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value }));
+      batches[0].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value, outputFile, noResultsFile }));
       currentBatch += 1;
   
       if (
@@ -63,7 +65,7 @@ const wordReferenceToCsv = async ({
         let interval;
   
         interval = setInterval(() => {
-          batches[currentBatch].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value }));
+          batches[currentBatch].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value, outputFile, noResultsFile }));
           if (
             WordReferenceUtils.determineIfFinishedProcessing(
               currentBatch,
@@ -99,7 +101,7 @@ const wordReferenceToCsv = async ({
       const lines = WordReferenceUtils.formatLines(data);
       const batches = WordReferenceUtils.createBatches(lines);
       let currentBatch = 0;
-      batches[0].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value }));
+      batches[0].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value, outputFile, noResultsFile }));
       currentBatch += 1;
   
       if (
@@ -112,7 +114,7 @@ const wordReferenceToCsv = async ({
         let interval;
   
         interval = setInterval(() => {
-          batches[currentBatch].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value }));
+          batches[currentBatch].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value, outputFile, noResultsFile }));
           if (
             WordReferenceUtils.determineIfFinishedProcessing(
               currentBatch,
@@ -130,6 +132,10 @@ const wordReferenceToCsv = async ({
     });
   }
 };
+
+const results = wordReferenceToCsv({ inputFormat: 'string', inputData: ';hola', outputFile: 'output.csv', noResultsFile: './no_results.csv', inputSourceLanguage: 'es', outputTargetLanguage: 'en'});
+
+console.log(results);
 
 
 module.exports = wordReferenceToCsv;
