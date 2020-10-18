@@ -18,29 +18,18 @@ To work with this package, you'll need at the bare minimum to create a no_result
 
 ### Installing
 
-- npm install word_reference_to_csv
+```npm install word_reference_to_csv```
 
-```
-Give the example
 ```js
-wordReferenceToCsv({ inputFormat: 'string', inputData: `;vitaminico
-; potasio
-; criada
-; poner en marcha
-; peramanzana
-; bollo
-; salvado
-; avena
-; estante
-; grisaceo
-; microondas
-; tazón`});
+const inputData =
+  ';vitaminico ;potasio ;criada ;poner en marcha ;peramanzana ;bollo';
+
+wordReferenceToCsv({
+  inputSourceLanguage: 'es',
+  outputTargetLanguage: 'en',
+  outputFile: '',
+  noResultsFile: '',
+  inputFormat: 'string',
+  inputData,
+});
 ```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## Usage <a name = "usage"></a>
-
-Add notes about how to use the system.
