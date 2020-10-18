@@ -166,19 +166,6 @@ const wordReferenceToCsv = ({
   
 };
 
-// wordReferenceToCsv({ inputFormat: 'string', inputData: `;vitaminico
-// ; potasio
-// ; criada
-// ; poner en marcha
-// ; peramanzana
-// ; bollo
-// ; salvado
-// ; avena
-// ; estante
-// ; grisaceo
-// ; microondas
-// ; tazón`});
-
 module.exports = {
   wordReferenceToCsv,
   wordReferenceToCsvFromString

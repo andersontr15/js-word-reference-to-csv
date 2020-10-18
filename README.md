@@ -31,10 +31,19 @@ Say what the step will be
 
 ```
 Give the example
-```
-
-And repeat
-
+```js
+wordReferenceToCsv({ inputFormat: 'string', inputData: `;vitaminico
+; potasio
+; criada
+; poner en marcha
+; peramanzana
+; bollo
+; salvado
+; avena
+; estante
+; grisaceo
+; microondas
+; tazón`});
 ```
 until finished
 ```
