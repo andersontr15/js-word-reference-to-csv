@@ -20,8 +20,6 @@ To work with this package, you'll need at the bare minimum to create a no_result
 
 - npm install word_reference_to_csv
 
-```
-Give the example
 ```js
 wordReferenceToCsv({ inputFormat: 'string', inputData: `;vitaminico
 ; potasio
@@ -36,11 +34,3 @@ wordReferenceToCsv({ inputFormat: 'string', inputData: `;vitaminico
 ; microondas
 ; tazón`});
 ```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## Usage <a name = "usage"></a>
-
-Add notes about how to use the system.
