@@ -10,50 +10,7 @@ const formatProcessArgv = argv => {
   }
 }
 
-
-const wordReferenceToCsvFromString = (data = '') => {
-    let sourceLanguage;
-    let targetLanguage;
-    try {
-       sourceLanguage = formatProcessArgv(process.argv[2]);
-       targetLanguage = formatProcessArgv(process.argv[3]);
-    }
-    catch(err) {
-      throw new Error('Must enter source and target language')
-    }
-    if (err) throw err;
-    if (data.length === 0)
-      throw new Error("Must have at least one line in input.csv!");
-    const lines = WordReferenceUtils.formatLines(data);
-    const batches = WordReferenceUtils.createBatches(lines);
-    let currentBatch = 0;
-    batches[0].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value }));
-    currentBatch += 1;
-
-    if (
-      WordReferenceUtils.determineIfFinishedProcessing(currentBatch, batches)
-    ) {
-      return;
-    } else {
-      let interval;
-
-      interval = setInterval(() => {
-        batches[currentBatch].forEach(line => WordReferenceUtils.fetchData({ line, sourceLanguage: sourceLanguage.value, targetLanguage: targetLanguage.value }));
-        if (
-          WordReferenceUtils.determineIfFinishedProcessing(
-            currentBatch,
-            batches
-          )
-        ) {
-          clearInterval(interval);
-          return;
-        }
-        currentBatch += 1;
-      }, DEBOUNCE_DURATION);
-    }
-};
-
-const wordReferenceToCsv = ({
+const wordReferenceToCsv = async ({
   inputFile = INPUT_FILE,
   outputFile = OUTPUT_FILE,
   noResultsFile = NO_RESULTS_FILE,
@@ -80,8 +37,8 @@ const wordReferenceToCsv = ({
   let sourceLanguage;
   let targetLanguage;
   try {
-     sourceLanguage = formatProcessArgv(process.argv[2]) || inputSourceLanguage;
-     targetLanguage = formatProcessArgv(process.argv[3]) || outputTargetLanguage;
+     sourceLanguage = inputSourceLanguage || formatProcessArgv(process.argv[2]);
+     targetLanguage = outputTargetLanguage || formatProcessArgv(process.argv[3]);
   }
   catch(err) {
     throw new Error('Must enter source and target language')
@@ -99,7 +56,9 @@ const wordReferenceToCsv = ({
       if (
         WordReferenceUtils.determineIfFinishedProcessing(currentBatch, batches)
       ) {
-        return;
+        return {
+          output: fs.readFileSync(outputFile, 'utf-8').split('\n')
+        }
       } else {
         let interval;
   
@@ -112,12 +71,16 @@ const wordReferenceToCsv = ({
             )
           ) {
             clearInterval(interval);
-            return;
+            return {
+              output: fs.readFileSync(outputFile, 'utf-8').split('\n')
+            }
           }
           currentBatch += 1;
         }, DEBOUNCE_DURATION);
       }
-    return;
+    return {
+      output: fs.readFileSync(outputFile, 'utf-8').split('\n')
+    };
   }
   else {
     fs.readFile(inputFile, FORMATS.UTF8, (err, data) => {
@@ -142,7 +105,9 @@ const wordReferenceToCsv = ({
       if (
         WordReferenceUtils.determineIfFinishedProcessing(currentBatch, batches)
       ) {
-        return;
+        return {
+          output: fs.readFileSync(outputFile, 'utf-8').split('\n')
+        };
       } else {
         let interval;
   
@@ -155,18 +120,16 @@ const wordReferenceToCsv = ({
             )
           ) {
             clearInterval(interval);
-            return;
+            return {
+              output: fs.readFileSync(outputFile, 'utf-8').split('\n')
+            }
           }
           currentBatch += 1;
         }, DEBOUNCE_DURATION);
       }
     });
   }
-
-  
 };
 
-module.exports = {
-  wordReferenceToCsv,
-  wordReferenceToCsvFromString
-};
+
+module.exports = wordReferenceToCsv;
