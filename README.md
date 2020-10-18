@@ -21,7 +21,13 @@ To work with this package, you'll need at the bare minimum to create a no_result
 ```npm install word_reference_to_csv```
 
 ```js
-wordReferenceToCsv({ inputFormat: 'string', inputData: `;vitaminico
+wordReferenceToCsv({
+  inputSourceLanguage: 'es',
+  outputTargetLanguage: 'en',
+  outputFile: '',
+  noResultsFile: '',
+  inputFormat: 'string',
+  inputData: `;vitaminico
 ; potasio
 ; criada
 ; poner en marcha
@@ -32,5 +38,6 @@ wordReferenceToCsv({ inputFormat: 'string', inputData: `;vitaminico
 ; estante
 ; grisaceo
 ; microondas
-; tazón`});
+; tazón`,
+});
 ```
