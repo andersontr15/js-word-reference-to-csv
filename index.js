@@ -58,9 +58,7 @@ const wordReferenceToCsv = async ({
       if (
         WordReferenceUtils.determineIfFinishedProcessing(currentBatch, batches)
       ) {
-        return {
-          output: fs.readFileSync(outputFile, 'utf-8').split('\n')
-        }
+        return;
       } else {
         let interval;
   
@@ -80,9 +78,7 @@ const wordReferenceToCsv = async ({
           currentBatch += 1;
         }, DEBOUNCE_DURATION);
       }
-    return {
-      output: fs.readFileSync(outputFile, 'utf-8').split('\n')
-    };
+    return;
   }
   else {
     fs.readFile(inputFile, FORMATS.UTF8, (err, data) => {
@@ -107,9 +103,7 @@ const wordReferenceToCsv = async ({
       if (
         WordReferenceUtils.determineIfFinishedProcessing(currentBatch, batches)
       ) {
-        return {
-          output: fs.readFileSync(outputFile, 'utf-8').split('\n')
-        };
+        return;
       } else {
         let interval;
   
@@ -122,9 +116,7 @@ const wordReferenceToCsv = async ({
             )
           ) {
             clearInterval(interval);
-            return {
-              output: fs.readFileSync(outputFile, 'utf-8').split('\n')
-            }
+            return;
           }
           currentBatch += 1;
         }, DEBOUNCE_DURATION);
@@ -132,10 +124,6 @@ const wordReferenceToCsv = async ({
     });
   }
 };
-
-const results = wordReferenceToCsv({ inputFormat: 'string', inputData: ';hola', outputFile: 'output.csv', noResultsFile: './no_results.csv', inputSourceLanguage: 'es', outputTargetLanguage: 'en'});
-
-console.log(results);
 
 
 module.exports = wordReferenceToCsv;
