@@ -85,8 +85,8 @@ const wordReferenceToCsv = async ({
       let sourceLanguage;
       let targetLanguage;
       try {
-         sourceLanguage = formatProcessArgv(process.argv[2]);
-         targetLanguage = formatProcessArgv(process.argv[3]);
+        sourceLanguage = inputSourceLanguage || formatProcessArgv(process.argv[2]);
+        targetLanguage = outputTargetLanguage || formatProcessArgv(process.argv[3]);
       }
       catch(err) {
         throw new Error('Must enter source and target language')
