@@ -22,7 +22,7 @@ To work with this package, you'll need at the bare minimum to create a no_result
 
 ```js
 const inputData =
-  ';vitaminico ; potasio ; criada ; poner en marcha ; peramanzana ; bollo';
+  ';vitaminico ;potasio ;criada ;poner en marcha ;peramanzana ;bollo';
 
 wordReferenceToCsv({
   inputSourceLanguage: 'es',
