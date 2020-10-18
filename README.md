@@ -18,7 +18,7 @@ To work with this package, you'll need at the bare minimum to create a no_result
 
 ### Installing
 
-- ```npm install word_reference_to_csv```
+```npm install word_reference_to_csv```
 
 ```js
 wordReferenceToCsv({ inputFormat: 'string', inputData: `;vitaminico
