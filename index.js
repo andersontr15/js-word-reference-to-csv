@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { WordReferenceUtils } = require("./WordReferenceUtils");
-const { DEBOUNCE_DURATION, FORMATS, INPUT_FILE } = require("./constants");
+const { DEBOUNCE_DURATION, FORMATS, INPUT_FILE, OUTPUT_FILE, NO_RESULTS_FILE } = require("./constants");
 
 const formatProcessArgv = argv => {
   const [key, value] = argv.split('=')
@@ -53,9 +53,27 @@ const wordReferenceToCsvFromString = (data = '') => {
     }
 };
 
-const wordReferenceToCsv = () => {
+const wordReferenceToCsv = ({
+  inputFile = INPUT_FILE,
+  outputFile = OUTPUT_FILE,
+  noResultsFile = NO_RESULTS_FILE
+}) => {
+  if(!fs.existsSync(inputFile)) {
+    console.error('Input file path doesn\'t exist.');
+    return;
+  }
 
-  fs.readFile(INPUT_FILE, FORMATS.UTF8, (err, data) => {
+  if(!fs.existsSync(outputFile)) {
+    console.error('Input file path doesn\'t exist.');
+    return;
+  }
+
+  if(!fs.existsSync(noResultsFile)) {
+    console.error('No results file path doesn\'t exist.');
+    return;
+  }
+
+  fs.readFile(inputFile, FORMATS.UTF8, (err, data) => {
     let sourceLanguage;
     let targetLanguage;
     try {
@@ -97,6 +115,8 @@ const wordReferenceToCsv = () => {
     }
   });
 };
+
+wordReferenceToCsv({ noResultsFile: 'null'});
 
 module.exports = {
   wordReferenceToCsv,

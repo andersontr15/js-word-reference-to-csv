@@ -30,7 +30,11 @@ class WordReferenceUtils {
       .map(t => t.to.trim())
       .join(", ");
   }
-  static async fetchData({ line, sourceLanguage = LANGUAGE_FROM, targetLanguage = LANGUAGE_TO }) {
+  static async fetchData({ line, sourceLanguage = LANGUAGE_FROM, targetLanguage = LANGUAGE_TO, outputFile = OUTPUT_FILE, noResultsFile = NO_RESULTS_FILE }) {
+    if(!fs.existsSync(outputFile) || !fs.existsSync(noResultsFile)) {
+      console.error('Must enter valid output file and no results file!');
+      return;
+    }
     const hint = `(${line[0]})`;
     const response = await wordReferenceApi(
       encodeURI(line.normalize("NFD").replace(/[\u0300-\u036f]/g, "")),
