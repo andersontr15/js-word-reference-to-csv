@@ -21,18 +21,8 @@ To work with this package, you'll need at the bare minimum to create a no_result
 ```npm install word_reference_to_csv```
 
 ```js
-const inputData = `;vitaminico
-; potasio
-; criada
-; poner en marcha
-; peramanzana
-; bollo
-; salvado
-; avena
-; estante
-; grisaceo
-; microondas
-; tazón`;
+const inputData =
+  ';vitaminico ; potasio ; criada ; poner en marcha ; peramanzana ; bollo';
 
 wordReferenceToCsv({
   inputSourceLanguage: 'es',
